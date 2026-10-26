@@ -1,0 +1,967 @@
+
+
+/* ===== Welcome Screen ===== */
+
+.welcome-screen {
+  min-height: 100vh;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+.welcome-card {
+  width: 100%;
+  max-width: 540px;
+  box-sizing: border-box;
+  padding: 54px 46px;
+  position: relative;
+  background: rgba(255, 253, 247, 0.88);
+  border: 1px solid #ded5c5;
+  border-radius: 5px 18px 18px 5px;
+  box-shadow:
+    0 3px 6px rgba(70, 55, 35, 0.03),
+    0 18px 45px rgba(70, 55, 35, 0.09);
+  animation: welcome-appear 0.65s ease both;
+}
+
+/* Subtle paper accent on the left */
+.welcome-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 4px;
+  border-radius: 5px 0 0 5px;
+  background: #b8a184;
+}
+
+.welcome-eyebrow {
+  margin: 0 0 22px;
+  color: #947957;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  line-height: 1.6;
+}
+
+.welcome-card h1 {
+  max-width: 420px;
+  margin: 0 0 18px;
+  color: #493d2e;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(34px, 5vw, 46px);
+  font-weight: 500;
+  letter-spacing: -1.4px;
+  line-height: 1.14;
+}
+
+.welcome-description {
+  max-width: 380px;
+  margin: 0 0 36px;
+  color: #776b5b;
+  font-size: 15px;
+  line-height: 1.85;
+}
+
+.welcome-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.welcome-form label {
+  color: #493d2e;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.welcome-form input {
+  width: 100%;
+  min-height: 48px;
+  box-sizing: border-box;
+  padding: 13px 15px;
+  border: 1px solid #d9cebb;
+  border-radius: 8px;
+  outline: none;
+  background: #fffdf7;
+  color: #493d2e;
+  font: inherit;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+.welcome-form input::placeholder {
+  color: #b0a493;
+}
+
+.welcome-form input:focus {
+  border-color: #9b8465;
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(155, 132, 101, 0.14);
+}
+
+.welcome-form button {
+  min-height: 48px;
+  margin-top: 8px;
+  padding: 13px 18px;
+  border: 1px solid #78684f;
+  border-radius: 8px;
+  background: #78684f;
+  color: #fffdf7;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.welcome-form button:hover {
+  background: #62543f;
+  box-shadow: 0 5px 12px rgba(70, 55, 35, 0.14);
+  transform: translateY(-1px);
+}
+
+.welcome-form button:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+.welcome-form button:focus-visible {
+  outline: 3px solid rgba(120, 104, 79, 0.35);
+  outline-offset: 3px;
+}
+
+@keyframes welcome-appear {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 480px) {
+  .welcome-screen {
+    padding: 20px 16px;
+  }
+
+  .welcome-card {
+    padding: 40px 26px;
+  }
+
+  .welcome-card h1 {
+    font-size: 35px;
+  }
+
+  .welcome-description {
+    margin-bottom: 28px;
+    font-size: 14px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .welcome-card {
+    animation: none;
+  }
+
+  .welcome-form input,
+  .welcome-form button {
+    transition: none;
+  }
+}
+
+/* =========================================
+   1. GLOBAL STYLES & PAPER COLORS
+========================================= */
+
+:root {
+  font-family: Georgia, "Times New Roman", serif;
+  color: #38372f;
+  background: #e8dfcc;
+  
+  --paper: #f5f1e8;
+  --paper-dark: #ebe5d8;
+  --ink: #38372f;
+  --ink-light: #777263;
+  --line: #d8d0bd;
+  --red-ink: #b65349;
+  --blue-ink: #496a83;
+  --green-ink: #657b56;
+  --shadow: rgba(76, 61, 39, 0.12);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--ink);
+  background-color: #e8dfcc;
+
+  /* Soft, grainy paper-like background */
+  background-image:
+    radial-gradient(
+      ellipse at 20% 30%,
+      rgba(255, 255, 255, 0.35),
+      transparent 60%
+    ),
+    radial-gradient(
+      ellipse at 80% 70%,
+      rgba(151, 122, 78, 0.07),
+      transparent 55%
+    ),
+    repeating-radial-gradient(
+      circle at 0 0,
+      rgba(90, 75, 50, 0.025) 0,
+      rgba(90, 75, 50, 0.025) 0.6px,
+      transparent 0.8px,
+      transparent 4px
+    );
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    transform 0.15s ease;
+}
+
+button:hover {
+  transform: translateY(-1px);
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+  transform: none;
+}
+
+
+/* =========================================
+   2. MAIN PAPER DASHBOARD
+========================================= */
+
+.dashboard {
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1.2fr)
+    minmax(0, 1fr);
+
+  grid-template-rows: auto auto auto auto;
+  align-content: start;
+  align-items: stretch;
+
+  gap: 18px 22px;
+
+  width: min(1600px, calc(100% - 40px));
+  min-height: calc(100vh - 40px);
+
+  margin: 20px auto;
+  padding: 30px 38px 36px;
+
+  background-color: rgba(250, 245, 233, 0.96);
+
+  /* Grainy paper texture, without lines or margins */
+  background-image:
+    radial-gradient(
+      ellipse at top left,
+      rgba(255, 255, 255, 0.55),
+      transparent 75%
+    ),
+    repeating-radial-gradient(
+      circle at 0 0,
+      rgba(90, 75, 50, 0.018) 0,
+      rgba(90, 75, 50, 0.018) 0.5px,
+      transparent 0.8px,
+      transparent 4px
+    );
+
+  border: 1px solid #ded2bc;
+  border-radius: 4px;
+
+  box-shadow:
+    0 3px 8px rgba(76, 61, 39, 0.05),
+    0 18px 50px var(--shadow);
+}
+
+
+/* =========================================
+   3. PAGE HEADING
+========================================= */
+
+.dashboard > h1 {
+  grid-column: 1 / -1;
+  grid-row: 1;
+
+  margin: 0;
+  align-self: end;
+
+  font-size: clamp(2rem, 3vw, 2.8rem);
+  font-weight: 700;
+  letter-spacing: -1px;
+  color: #38372f;
+}
+
+.dashboard > p {
+  grid-column: 1 / -1;
+  grid-row: 2;
+
+  margin: 0 0 4px;
+
+  color: var(--ink-light);
+  font-size: 1.05rem;
+  font-style: italic;
+}
+
+
+/* =========================================
+   4. DASHBOARD CARD POSITIONS
+========================================= */
+
+.dashboard > .card:first-of-type {
+  grid-column: 1;
+  grid-row: 3 / span 2;
+}
+
+.focus-card {
+  grid-column: 2;
+  grid-row: 3;
+}
+
+.progress-card {
+  grid-column: 2;
+  grid-row: 4;
+}
+
+.habits-card {
+  grid-column: 1 / -1;
+  grid-row: 5;
+}
+
+.dashboard > .card {
+  width: 100%;
+  min-width: 0;
+  align-self: stretch;
+}
+
+
+/* =========================================
+   5. PAPER CARDS
+========================================= */
+
+.card {
+  position: relative;
+  min-width: 0;
+  padding: 20px 22px;
+
+  background-color: rgba(245, 241, 232, 0.97);
+
+  border: 1px solid #d9cfba;
+  border-radius: 3px;
+
+  box-shadow:
+    2px 3px 0 rgba(104, 84, 55, 0.06),
+    0 5px 14px rgba(76, 61, 39, 0.05);
+}
+
+.card::before {
+  content: "";
+
+  position: absolute;
+  top: 0;
+  left: 18px;
+  right: 18px;
+
+  height: 3px;
+
+  background: rgba(73, 106, 131, 0.28);
+}
+
+.card h2 {
+  margin: 0 0 10px;
+
+  color: #38372f;
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+}
+
+.card p {
+  line-height: 1.5;
+}
+
+
+/* =========================================
+   6. TASK FORM
+========================================= */
+
+.task-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 14px 0;
+}
+
+.task-form input[type="text"],
+.task-form select {
+  min-width: 0;
+  padding: 10px 12px;
+
+  color: var(--ink);
+  background: #fffdf7;
+
+  border: 1px solid #cfc4ae;
+  border-radius: 3px;
+  outline: none;
+}
+
+.task-form input[type="text"] {
+  flex: 1;
+}
+
+.task-form button {
+  padding: 10px 16px;
+
+  color: #fffaf0;
+  background: var(--blue-ink);
+
+  border: 1px solid #3e5c72;
+  border-radius: 3px;
+}
+
+.task-form button:hover {
+  background: #3d5b73;
+}
+
+.task-form input:focus,
+.task-form select:focus,
+.habit-form input:focus,
+.duration-setting input:focus {
+  border-color: var(--blue-ink);
+  box-shadow: 0 0 0 3px rgba(73, 106, 131, 0.12);
+}
+
+.task-summary,
+.progress-count,
+.habits-progress {
+  color: var(--ink-light);
+  font-size: 0.92rem;
+}
+
+.task-summary {
+  margin: 6px 0 10px;
+}
+
+
+/* =========================================
+   7. TASK FILTER BUTTONS
+========================================= */
+
+.task-filters {
+  display: flex;
+  gap: 8px;
+  margin: 14px 0;
+}
+
+.filter-button {
+  padding: 7px 13px;
+
+  color: var(--ink-light);
+  background: transparent;
+
+  border: 1px solid #cfc4ae;
+  border-radius: 3px;
+}
+
+.filter-button:hover {
+  background: #eee5d4;
+}
+
+.filter-button.active {
+  color: #fffaf0;
+  background: var(--blue-ink);
+  border-color: var(--blue-ink);
+}
+
+
+/* =========================================
+   8. TASK LIST
+========================================= */
+
+.task-list,
+.habits-list {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0 0;
+}
+
+.task-list li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+
+  padding: 9px 4px;
+
+  border-bottom: 1px dashed #d5cbb8;
+}
+
+.task-list li:last-child {
+  border-bottom: none;
+}
+
+.task-list input[type="checkbox"],
+.habit-item input[type="checkbox"] {
+  width: 17px;
+  height: 17px;
+
+  accent-color: var(--green-ink);
+  cursor: pointer;
+}
+
+.task-list li span {
+  flex: 1;
+  min-width: 70px;
+  overflow-wrap: anywhere;
+}
+
+.completed,
+.habit-completed {
+  color: #8b8779;
+  text-decoration: line-through;
+  text-decoration-color: var(--green-ink);
+}
+
+.edit-button,
+.save-button,
+.cancel-button,
+.delete-task {
+  padding: 6px 9px;
+  border-radius: 3px;
+  font-size: 0.8rem;
+}
+
+.edit-button {
+  color: #5a513e;
+  background: #e8e0cb;
+  border: 1px solid #d2c5aa;
+}
+
+.save-button {
+  color: #3e5c35;
+  background: #dce8d5;
+  border: 1px solid #bdcfb2;
+}
+
+.cancel-button {
+  color: #625b4f;
+  background: #eee6d9;
+  border: 1px solid #d7cbbb;
+}
+
+.delete-task,
+.delete-habit {
+  color: #a0473e;
+  background: #f3e0d9;
+  border: 1px solid #e3c3b8;
+}
+
+.delete-task:hover,
+.delete-habit:hover {
+  background: #ebcfc4;
+}
+
+
+/* =========================================
+   9. TASK PROGRESS
+========================================= */
+
+.progress-count {
+  margin: 0 0 12px;
+}
+
+.progress-bar,
+.habits-progress-bar {
+  width: 100%;
+  height: 12px;
+  overflow: hidden;
+
+  background: #e4dccb;
+  border: 1px solid #d4c8b1;
+  border-radius: 2px;
+}
+
+.progress-fill {
+  height: 100%;
+  background: var(--blue-ink);
+  transition: width 0.3s ease;
+}
+
+.progress-percentage {
+  margin: 8px 0 0;
+
+  color: var(--blue-ink);
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-align: right;
+}
+
+
+/* =========================================
+   10. FOCUS TIMER
+========================================= */
+
+.focus-description,
+.habits-description {
+  margin: 6px 0 10px;
+
+  color: var(--ink-light);
+  font-style: italic;
+  font-size: 0.92rem;
+}
+
+.duration-setting {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+
+  margin: 12px 0;
+}
+
+.duration-setting label {
+  font-size: 0.92rem;
+}
+
+.duration-setting input {
+  width: 90px;
+  padding: 8px;
+
+  color: var(--ink);
+  background: #fffdf7;
+
+  border: 1px solid #cfc4ae;
+  border-radius: 3px;
+  outline: none;
+}
+
+.timer-presets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin: 10px 0;
+}
+
+.timer-presets button {
+  padding: 7px 11px;
+
+  color: #4c493e;
+  background: #e8e0ce;
+
+  border: 1px solid #d2c5ac;
+  border-radius: 3px;
+  font-size: 0.85rem;
+}
+
+.timer-presets button:hover {
+  background: #ded2bb;
+}
+
+.timer-display {
+  margin: 12px 0;
+
+  color: #393a32;
+  font-family: "Courier New", monospace;
+  font-size: clamp(2.5rem, 4vw, 3.4rem);
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+.timer-controls {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.timer-controls button {
+  min-width: 76px;
+  padding: 9px 12px;
+
+  color: #fffaf0;
+  background: var(--green-ink);
+
+  border: 1px solid #526746;
+  border-radius: 3px;
+
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.timer-controls button:hover {
+  background: #526746;
+}
+
+.timer-controls button:nth-child(2) {
+  color: #4c493e;
+  background: #e8e0ce;
+  border-color: #d2c5ac;
+}
+
+.timer-controls button:nth-child(2):hover {
+  background: #ded2bb;
+}
+
+.timer-controls button:nth-child(3) {
+  background: var(--red-ink);
+  border-color: #98463e;
+}
+
+.timer-controls button:nth-child(3):hover {
+  background: #98463e;
+}
+
+.timer-label {
+  margin: 10px 0 0;
+
+  color: var(--ink-light);
+  font-style: italic;
+  text-align: center;
+}
+
+
+/* =========================================
+   11. DAILY HABITS
+========================================= */
+
+.habits-progress {
+  margin: 6px 0 10px;
+}
+
+.habits-progress-bar {
+  height: 10px;
+  margin: 10px 0 14px;
+}
+
+.habits-progress-fill {
+  height: 100%;
+  background: var(--green-ink);
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+
+.habit-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 12px 0;
+}
+
+.habit-form input {
+  flex: 1;
+  min-width: 0;
+  padding: 9px 11px;
+
+  color: var(--ink);
+  background: #fffdf7;
+
+  border: 1px solid #cfc4ae;
+  border-radius: 3px;
+  outline: none;
+}
+
+.habit-form button {
+  padding: 9px 13px;
+
+  color: #fffaf0;
+  background: var(--green-ink);
+
+  border: 1px solid #526746;
+  border-radius: 3px;
+}
+
+.habit-form button:hover {
+  background: #526746;
+}
+
+.habits-list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+
+  padding: 9px 2px;
+
+  border-bottom: 1px dashed #d5cbb8;
+}
+
+.habits-list li:last-child {
+  border-bottom: none;
+}
+
+.habit-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  flex: 1;
+  min-width: 0;
+}
+
+.habit-item span {
+  overflow-wrap: anywhere;
+}
+
+.delete-habit {
+  padding: 6px 10px;
+
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 0.8rem;
+}
+
+
+/* =========================================
+   12. TABLET LAYOUT
+========================================= */
+
+@media (max-width: 1000px) {
+  .dashboard {
+    width: calc(100% - 28px);
+    min-height: auto;
+
+    margin: 14px auto;
+    padding: 26px 28px;
+
+    gap: 16px;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+
+  .dashboard > .card:first-of-type {
+    grid-column: 1;
+    grid-row: 3 / span 2;
+  }
+
+  .focus-card {
+    grid-column: 2;
+    grid-row: 3;
+  }
+
+  .progress-card {
+    grid-column: 2;
+    grid-row: 4;
+  }
+
+  .habits-card {
+    grid-column: 1 / -1;
+    grid-row: 5;
+  }
+
+  .card {
+    padding: 18px;
+  }
+
+  .timer-display {
+    font-size: 2.8rem;
+  }
+}
+
+
+/* =========================================
+   13. MOBILE LAYOUT
+========================================= */
+
+@media (max-width: 700px) {
+  .dashboard {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto;
+
+    width: calc(100% - 16px);
+    min-height: auto;
+
+    margin: 8px auto;
+    padding: 24px 22px 28px;
+
+    gap: 15px;
+  }
+
+  .dashboard > h1,
+  .dashboard > p,
+  .dashboard > .card:first-of-type,
+  .focus-card,
+  .progress-card,
+  .habits-card {
+    grid-column: 1;
+    grid-row: auto;
+  }
+
+  .dashboard > h1 {
+    font-size: 2rem;
+  }
+
+  .dashboard > p {
+    margin-bottom: 4px;
+  }
+
+  .card {
+    padding: 17px;
+  }
+
+  .card h2 {
+    font-size: 1.3rem;
+  }
+
+  .task-form {
+    flex-direction: column;
+  }
+
+  .task-form input[type="text"],
+  .task-form select,
+  .task-form button {
+    width: 100%;
+  }
+
+  .timer-display {
+    font-size: 2.8rem;
+  }
+}
+
+
+.habit-streak {
+  display: inline-block;
+  margin-left: 10px;
+  padding: 4px 9px;
+  border-radius: 20px;
+  background: #f4e4cf;
+  color: #9b542c;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
