@@ -23,33 +23,9 @@ function App() {
 
   const [nameInput, setNameInput] = useState("");
 
-  const [tasks, setTasks] = useState(() => {
-    const savedTasks = localStorage.getItem("tasks");
+  const [tasks, setTasks] = useState([]);
 
-    if (savedTasks) {
-      return JSON.parse(savedTasks);
-    }
-
-    return [
-      { id: 1, title: "Learn React", completed: false, priority: "high" },
-      { id: 2, title: "Build dashboard", completed: false, priority: "medium" },
-      { id: 3, title: "Practice JavaScript", completed: true, priority: "low" },
-    ];
-  });
-
-  const [habits, setHabits] = useState(() => {
-    const savedHabits = localStorage.getItem("habits");
-
-    if (savedHabits) {
-      return JSON.parse(savedHabits);
-    }
-
-    return [
-      { id: 1, title: "Read for 20 minutes", completed: false },
-      { id: 2, title: "Exercise", completed: false },
-      { id: 3, title: "Study for 1 hour", completed: false },
-    ];
-  });
+  const [habits, setHabits] = useState([]);
 
   const [newTask, setNewTask] = useState("");
   const [newHabit, setNewHabit] = useState("");
